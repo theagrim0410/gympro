@@ -1,0 +1,104 @@
+MONGODB DATABASE SCHEMA - GYM APP
+==================================
+
+TABLE 1: COMPLAINTS
+Number of Fields: 7
+Description: Stores user complaints, feedback, and support tickets
+
+Fields:
+├── id (Number) - Unique identifier for complaint
+├── userId (String) - ID of the user who filed the complaint
+├── username (String) - Name of the complaining user
+├── category (String) - Category of complaint (Technical Issue, Workout Accuracy, Billing, Other)
+├── subject (String) - Title/subject of the complaint
+├── description (String) - Detailed description of the complaint
+├── status (String) - Current status (Pending, In Review, Resolved, Open)
+└── createdAt (ISO String) - Timestamp when complaint was created
+
+---
+
+TABLE 2: NUTRITION PLANS
+Number of Fields: 6
+Description: Stores nutrition goals and macro requirements
+
+Fields:
+├── id (Number) - Unique identifier for nutrition plan
+├── title (String) - Name of goal (Fat Loss, Muscle Gain, Maintenance)
+├── protein (String) - Target protein intake (e.g., "180g")
+├── carbs (String) - Target carbohydrate intake (e.g., "120g")
+├── fats (String) - Target fat intake (e.g., "55g")
+└── description (String) - Brief description of the nutrition plan
+
+---
+
+TABLE 3: USER DATA
+Number of Fields: 8
+Description: Stores detailed user profile information and workout statistics
+
+Fields:
+├── id (Number) - Unique identifier for user
+├── name (String) - Username
+├── role (String) - User role/title (Pro Athlete, AI Trainer, Elite Member, etc.)
+├── totalWorkouts (Number) - Total number of workouts completed
+├── isActive (Boolean) - Current activity status
+├── lastLogin (ISO String) - Timestamp of last login
+├── totalHours (Number) - Total hours spent working out
+├── streak (Number) - Current workout streak (consecutive days)
+└── avatar (URL String) - Profile picture URL
+
+---
+
+TABLE 4: USERS
+Number of Fields: 7
+Description: Stores user list for admin/management view
+
+Fields:
+├── id (Number) - Unique identifier for user
+├── name (String) - Username
+├── email (String) - User email address
+├── role (String) - User role/profession
+├── status (String) - User status (Active, Away)
+├── avatar (URL String) - Profile picture URL
+└── route (String) - Navigation route to user details
+
+---
+
+TABLE 5: WORKOUTS
+Number of Fields: 11
+Description: Stores workout exercises and their detailed information
+
+Fields:
+├── id (Number) - Unique identifier for workout
+├── name (String) - Exercise name
+├── description (String) - Detailed description of exercise
+├── image (Image/Require) - Exercise image file path
+├── video (Video/Require) - Exercise video file path
+├── caloriesBurned (Number) - Calories burned per session
+├── sets (Number) - Recommended number of sets
+├── repetitions (Number) - Recommended number of repetitions
+├── restTime (Number) - Rest time between sets (in seconds)
+├── steps (Array of Strings) - Step-by-step instructions
+├── mistake (String) - Common mistakes to avoid
+└── route (String) - Navigation route for workout details
+
+---
+
+TABLE 6: LOGIN
+Number of Fields: 4
+Description: Stores user authentication credentials and role information
+
+Fields:
+├── id (Number) - Unique identifier for user account
+├── username (String) - Username for login (unique)
+├── password (String) - User password (hashed in production)
+└── role (String) - User role (user, admin)
+
+---
+
+INDEXES RECOMMENDED:
+- Complaints: Index on userId, status, category
+- Users: Index on name, status, role
+- UserData: Index on name, isActive, streak
+- Workouts: Index on name, caloriesBurned
+- NutritionPlans: Index on title
+- Login: Index on username (unique), role
